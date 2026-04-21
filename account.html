@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой аккаунт - Приют для животных</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Notifications -->
+    <div class="notifications"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>🐾 Приют «Убежище»</h1>
+            <nav>
+                <a href="index.html">Главная</a>
+                <a href="animals.html">Животные</a>
+                <div id="user-info"></div>
+                <a id="login-btn" href="login.html" class="btn btn-small" style="background-color: white; color: var(--primary);">Вход</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Account Content -->
+    <section style="min-height: calc(100vh - 200px);">
+        <div class="container">
+            <div id="account-content">
+                <div style="text-align: center; padding: 3rem;">
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="grid grid-3">
+                <div>
+                    <h4>Приют «Убежище»</h4>
+                    <p>Дарим животным второй шанс на счастье</p>
+                </div>
+                <div>
+                    <h4>Контакты</h4>
+                    <p>📞 +7 (999) 123-45-67<br>📧 info@shelter.ru</p>
+                </div>
+                <div>
+                    <h4>Часы работы</h4>
+                    <p>Пн-Вс: 09:00 - 18:00<br>Без выходных</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Приют «Убежище». Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script>
+        function loadAccountPage() {
+            if (!isLoggedIn()) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            const user = getUser();
+            const bookings = getMyBookings();
+            
+            const statusLabels = {
+                'pending': 'В ожидании',
+                'approved': 'Одобрено',
+                'rejected': 'Отклонено',
+                'cancelled': 'Отменено'
+            };
+            
+            const statusBadges = {
+                'pending': 'badge-warning',
+                'approved': 'badge-primary',
+                'rejected': 'badge-danger',
+                'cancelled': 'badge-danger'
+            };
+            
+            const activeBookings = bookings.filter(b => ['pending', 'approved'].includes(b.status));
+            const pastBookings = bookings.filter(b => !['pending', 'approved'].includes(b.status));
+            
+            let html = `
+                <div class="card" style="margin-bottom: 3rem; background: linear-gradient(135deg, rgba(8,145,178,0.05) 0%, rgba(6,182,212,0.05) 100%);">
+                    <h2 style="color: var(--primary); margin-top: 0;">👤 Мой профиль</h2>
+                    <div class="grid grid-2" style="gap: 2rem; margin-bottom: 2rem;">
+                        <div>
+                            <p style="color: var(--text-light); margin: 0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;">Имя</p>
+                            <p style="margin: 0.5rem 0 0 0; font-weight: 600; color: var(--text); font-size: 1.25rem;">${user.name}</p>
+                        </div>
+                        <div>
+                            <p style="color: var(--text-light); margin: 0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;">Email</p>
+                            <p style="margin: 0.5rem 0 0 0; font-weight: 600; color: var(--text); font-size: 1.25rem;">${user.email}</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline" onclick="logout()" style="width: 100%; padding: 0.75rem;">Выход из аккаунта</button>
+                </div>
+
+                <h2 style="color: var(--primary); margin-bottom: 1.5rem;">📋 Мои бронирования</h2>
+            `;
+            
+            if (bookings.length === 0) {
+                html += `
+                    <div class="card" style="text-align: center; padding: 3rem;">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🐾</div>
+                        <p style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--text);">У вас еще нет бронирований</p>
+                        <p style="color: var(--text-light); margin-bottom: 1.5rem;">Начните поиск своего верного друга прямо сейчас!</p>
+                        <a href="animals.html" class="btn btn-primary">Посмотреть животных</a>
+                    </div>
+                `;
+            } else {
+                html += `
+                    <div style="margin-bottom: 3rem;">
+                        <h3 style="color: var(--primary); margin-bottom: 1.5rem;">✨ Активные бронирования (${activeBookings.length})</h3>
+                        ${activeBookings.length === 0 ? `
+                            <div class="card" style="text-align: center; padding: 2rem; color: var(--text-light);">
+                                Нет активных бронирований
+                            </div>
+                        ` : `
+                            <div class="grid grid-1" style="gap: 1.5rem;">
+                                ${activeBookings.map(b => `
+                                    <div class="card">
+                                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                            <div>
+                                                <h3 style="margin: 0; color: var(--primary); font-size: 1.25rem;">${b.animalName}</h3>
+                                                <p style="margin: 0.25rem 0 0 0; color: var(--text-light);">${b.species}</p>
+                                            </div>
+                                            <span class="badge ${statusBadges[b.status]}">${statusLabels[b.status]}</span>
+                                        </div>
+                                        <p style="color: var(--text-light); margin: 0; font-size: 0.9rem;">
+                                            📅 Дата бронирования: ${new Date(b.createdAt).toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' })}
+                                        </p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `}
+                    </div>
+
+                    <div>
+                        <h3 style="color: var(--primary); margin-bottom: 1.5rem;">📚 История бронирований (${pastBookings.length})</h3>
+                        ${pastBookings.length === 0 ? `
+                            <div class="card" style="text-align: center; padding: 2rem; color: var(--text-light);">
+                                Нет завершенных бронирований
+                            </div>
+                        ` : `
+                            <div class="grid grid-1" style="gap: 1.5rem;">
+                                ${pastBookings.map(b => `
+                                    <div class="card" style="opacity: 0.7; background-color: #f8fafc;">
+                                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                            <div>
+                                                <h3 style="margin: 0; color: var(--primary); font-size: 1.25rem;">${b.animalName}</h3>
+                                                <p style="margin: 0.25rem 0 0 0; color: var(--text-light);">${b.species}</p>
+                                            </div>
+                                            <span class="badge ${statusBadges[b.status]}">${statusLabels[b.status]}</span>
+                                        </div>
+                                        <p style="color: var(--text-light); margin: 0; font-size: 0.9rem;">
+                                            📅 Дата бронирования: ${new Date(b.createdAt).toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' })}
+                                        </p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `}
+                    </div>
+                `;
+            }
+            
+            document.getElementById('account-content').innerHTML = html;
+        }
+
+        loadAccountPage();
+    </script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приют «Убежище» - Найди своего питомца</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Notifications -->
+    <div class="notifications"></div>
+
+    <!-- Header Top -->
+    <div class="header-top">
+        <div class="container">
+            <div>
+                <span>📞 +7 (999) 123-45-67</span>
+                <span style="margin-left: 2rem;">📧 info@shelter.ru</span>
+            </div>
+            <div>
+                <span>📍 г. Москва, ул. Животных, д. 42</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>🐾 Приют «Убежище»</h1>
+            <nav>
+                <a href="index.html" class="active">Главная</a>
+                <a href="animals.html">Наши животные</a>
+                <a href="#about">О нас</a>
+                <a href="#contact">Контакты</a>
+            </nav>
+            <div class="header-right">
+                <div class="search-box">
+                    <input type="text" placeholder="Поиск животных...">
+                    <span>🔍</span>
+                </div>
+                <div class="header-icons">
+                    <button id="login-btn" onclick="window.location.href='login.html'">👤</button>
+                    <div id="user-info"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="label">Приют для животных</div>
+                <h1>Найди своего верного друга</h1>
+                <p>Каждое животное заслуживает любящего дома. Помогите нам найти идеальную семью для наших питомцев. Откройте свое сердце и дом для животного, которое нуждается в заботе и внимании.</p>
+                <a href="animals.html" class="btn btn-primary">Посмотреть животных</a>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-circle">🐕</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="container">
+            <h2>Выбери категорию</h2>
+            <div class="categories-grid">
+                <div class="category-card" onclick="window.location.href='animals.html?category=dogs'">
+                    <span class="category-card-icon">🐕</span>
+                    <h3>Собаки</h3>
+                    <p>Верные и преданные друзья</p>
+                </div>
+                <div class="category-card" onclick="window.location.href='animals.html?category=cats'">
+                    <span class="category-card-icon">🐱</span>
+                    <h3>Кошки</h3>
+                    <p>Ласковые и независимые</p>
+                </div>
+                <div class="category-card" onclick="window.location.href='animals.html?category=birds'">
+                    <span class="category-card-icon">🦜</span>
+                    <h3>Птицы</h3>
+                    <p>Яркие и веселые питомцы</p>
+                </div>
+                <div class="category-card" onclick="window.location.href='animals.html?category=other'">
+                    <span class="category-card-icon">🐰</span>
+                    <h3>Другие</h3>
+                    <p>Кролики, хомяки и другие</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Animals Section -->
+    <section style="background-color: var(--bg-white); padding: 4rem 0;">
+        <div class="container">
+            <h2>Популярные питомцы</h2>
+            <div class="grid grid-3">
+                <div class="animal-card">
+                    <div class="animal-card-image">🐕</div>
+                    <div class="animal-card-content">
+                        <div class="species">Собака</div>
+                        <h3>Макс</h3>
+                        <p>Дружелюбный лабрадор, 3 года. Идеален для активной семьи.</p>
+                        <span class="status available">Доступно</span>
+                        <a href="animal.html?id=1" class="btn btn-primary" style="width: 100%; text-align: center;">Подробнее</a>
+                    </div>
+                </div>
+                <div class="animal-card">
+                    <div class="animal-card-image">🐱</div>
+                    <div class="animal-card-content">
+                        <div class="species">Кошка</div>
+                        <h3>Мурка</h3>
+                        <p>Ласковая персидская кошка, 2 года. Любит уют и внимание.</p>
+                        <span class="status available">Доступно</span>
+                        <a href="animal.html?id=2" class="btn btn-primary" style="width: 100%; text-align: center;">Подробнее</a>
+                    </div>
+                </div>
+                <div class="animal-card">
+                    <div class="animal-card-image">🦜</div>
+                    <div class="animal-card-content">
+                        <div class="species">Попугай</div>
+                        <h3>Чик</h3>
+                        <p>Веселый волнистый попугай, 2 года. Может выучить слова.</p>
+                        <span class="status reserved">Зарезервировано</span>
+                        <a href="animal.html?id=5" class="btn btn-primary" style="width: 100%; text-align: center;">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" style="background-color: rgba(255, 149, 0, 0.05); padding: 4rem 0;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+                <div>
+                    <h2>О нашем приюте</h2>
+                    <p style="color: var(--text-gray); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1rem;">
+                        Приют «Убежище» — это место, где каждое животное получает вторую жизнь. Мы верим, что каждый питомец достоин любящей семьи и заботливого хозяина.
+                    </p>
+                    <p style="color: var(--text-gray); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1rem;">
+                        Наша миссия — помочь найти идеальный дом для животных, которые нуждаются в помощи. Мы предоставляем ветеринарное обслуживание, уход и социализацию каждому питомцу.
+                    </p>
+                    <p style="color: var(--text-gray); font-size: 1.05rem; line-height: 1.8;">
+                        Присоединяйтесь к нашей миссии и помогите животным найти счастье!
+                    </p>
+                </div>
+                <div style="display: flex; justify-content: center;">
+                    <div style="width: 300px; height: 300px; background: linear-gradient(135deg, rgba(255, 149, 0, 0.2) 0%, rgba(255, 165, 0, 0.2) 100%); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 120px;">
+                        🏠
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section style="background-color: var(--bg-white); padding: 4rem 0;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: center;">
+                <div>
+                    <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">150+</h3>
+                    <p style="color: var(--text-gray);">Животных спасено</p>
+                </div>
+                <div>
+                    <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">120+</h3>
+                    <p style="color: var(--text-gray);">Счастливых семей</p>
+                </div>
+                <div>
+                    <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">8</h3>
+                    <p style="color: var(--text-gray);">Лет помощи</p>
+                </div>
+                <div>
+                    <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">24/7</h3>
+                    <p style="color: var(--text-gray);">Служба поддержки</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" style="background: linear-gradient(135deg, var(--primary-orange) 0%, var(--accent-orange) 100%); padding: 4rem 0; color: white;">
+        <div class="container" style="text-align: center;">
+            <h2 style="color: white; margin-bottom: 1rem;">Готов помочь животным?</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem; color: rgba(255, 255, 255, 0.9);">
+                Посетите наш приют, посмотрите животных или станьте волонтером
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="animals.html" class="btn" style="background-color: white; color: var(--primary-orange);">Посмотреть животных</a>
+                <button class="btn" style="background-color: transparent; border: 2px solid white; color: white;" onclick="showNotification('Спасибо за интерес! Свяжитесь с нами по телефону.', 'success')">Стать волонтером</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="grid grid-3">
+                <div>
+                    <h4>Приют «Убежище»</h4>
+                    <p>Помогаем животным найти счастье</p>
+                </div>
+                <div>
+                    <h4>Контакты</h4>
+                    <p>📞 +7 (999) 123-45-67<br>📧 info@shelter.ru</p>
+                </div>
+                <div>
+                    <h4>Часы работы</h4>
+                    <p>Пн-Вс: 09:00 - 18:00<br>Без выходных</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Приют «Убежище». Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
